@@ -7,6 +7,8 @@ var Figure = function (objectConstructor) {
 
 Figure.prototype.render = function(context) {
 	
+	var x = Config.TILE_SIZE * this.x;
+	var y = Config.TILE_SIZE * this.y;
 	var image = new Image();
 
 	if (this.color == Config.FIGURES_COLORS.WHITE) {
@@ -53,5 +55,7 @@ Figure.prototype.render = function(context) {
 		}
 	}
 
-	context.drawImage(image, this.x, this.y);
+	image.onload = function () {
+		context.drawImage(image, x, y);
+	};
 };

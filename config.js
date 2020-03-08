@@ -5,8 +5,8 @@ var Config = {
 		BLACK: "#5c574c"
 	},
 	FIGURES_COLORS: {
-		WHITE: "#ffffff",
-		BLACK: "#000000"
+		WHITE: "WHITE",
+		BLACK: "BLACK"
 	},
 	WHITE_FIGURES: {
 		PAWN: "img/whitePawn.png",
