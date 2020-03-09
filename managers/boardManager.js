@@ -6,8 +6,8 @@ BoardManager.init = function (canvas) {
 	this.tilesCollection = [];
 	this.figuresCollection = [];
 
-	for (var i = 0; i < 10; i++) {
-		for (var j = 0; j < 10; j++) {
+	for (var i = 0; i < 8; i++) {
+		for (var j = 0; j < 8; j++) {
 			if ((i + j) % 2 == 0) {
 				var tileConstructor = {
 					x: j,
@@ -29,49 +29,61 @@ BoardManager.init = function (canvas) {
 	}
 	this.loadBoard();
 };
+BoardManager.renderTiles = function () {
+	for (var i = 0; i < BoardManager.tilesCollection.length; i++) {
+		BoardManager.tilesCollection[i].render(BoardManager.context);
+	}
+}
+
+BoardManager.renderFigures = function () {
+	for (var i = 0; i < BoardManager.figuresCollection.length; i++) {
+		BoardManager.figuresCollection[i].render(BoardManager.context);
+	}
+}
+
 
 BoardManager.loadBoard = function () {
-	var loadTiles = function () {
-		for (var i = 0; i < BoardManager.tilesCollection.length; i++) {
-			BoardManager.tilesCollection[i].render(BoardManager.context);
-		}
-	};
+	// var loadTiles = function () {
+	// 	for (var i = 0; i < BoardManager.tilesCollection.length; i++) {
+	// 		BoardManager.tilesCollection[i].render(BoardManager.context);
+	// 	}
+	// };
 
-	loadTiles();
+	BoardManager.renderTiles();
 
 	var loadFigures = function () {
 		var pawnWhiteConstructor_1 = {
 			type: Config.WHITE_FIGURES.PAWN,
 			color: Config.FIGURES_COLORS.WHITE,
-			x: 0,
+			x: Config.COORDINATES.A,
 			y: 1
 		};
 
 		var pawnWhiteConstructor_2 = {
 			type: Config.WHITE_FIGURES.PAWN,
 			color: Config.FIGURES_COLORS.WHITE,
-			x: 1,
+			x: Config.COORDINATES.B,
 			y: 1
 		};
 
 		var pawnWhiteConstructor_3 = {
 			type: Config.WHITE_FIGURES.PAWN,
 			color: Config.FIGURES_COLORS.WHITE,
-			x: 2,
+			x: Config.COORDINATES.C,
 			y: 1
 		};
 
 		var pawnWhiteConstructor_4 = {
 			type: Config.WHITE_FIGURES.PAWN,
 			color: Config.FIGURES_COLORS.WHITE,
-			x: 3,
+			x: Config.COORDINATES.D,
 			y: 1
 		};
 
 		var pawnWhiteConstructor_5 = {
 			type: Config.WHITE_FIGURES.PAWN,
 			color: Config.FIGURES_COLORS.WHITE,
-			x: 4,
+			x: Config.COORDINATES.E,
 			y: 1
 		};
 
@@ -86,10 +98,75 @@ BoardManager.loadBoard = function () {
 		BoardManager.figuresCollection.push(pawn_4);
 		BoardManager.figuresCollection.push(pawn_5);
 
-		for (var i = 0; i < BoardManager.figuresCollection.length; i++) {
-			BoardManager.figuresCollection[i].render(BoardManager.context);
-		}
+		// for (var i = 0; i < BoardManager.figuresCollection.length; i++) {
+		// 	BoardManager.figuresCollection[i].render(BoardManager.context);
+		// }
 	};
 
 	loadFigures();
+	BoardManager.renderFigures();
 };
+
+BoardManager.isFigureClicked = function (x, y) {
+
+	for (var figure of BoardManager.figuresCollection) {
+		var result = figure.isClicked(x, y);
+		return result;
+	}
+}
+
+BoardManager.clickedFigure = function () {
+	let i = 0;
+	for (var figure of BoardManager.figuresCollection) {
+		let test = figure.clicked();
+		if(test == true) {
+			i++;
+		}
+	}
+
+	if (i > 0) {
+		return true;
+	}
+	return false;
+}
+
+BoardManager.move = function (x, y) {
+	for (const figure of BoardManager.figuresCollection) {
+		let test = figure.clicked();
+		if (test == true) {
+			figure.move(x, y);
+		}
+	}
+}
+
+BoardManager.reRender = function () {
+	BoardManager.context.clearRect(0, 0, 400, 400);
+	BoardManager.renderTiles();
+	BoardManager.renderFigures();
+}
+
+BoardManager.findCoordinate = function (coordinate) {
+	if (coordinate < Config.TILE_SIZE) {
+		return 0;
+	} else if (coordinate > Config.TILE_SIZE
+		&& coordinate < Config.TILE_SIZE * 2) {
+		return 1;
+	} else if (coordinate > Config.TILE_SIZE * 2
+		&& coordinate < Config.TILE_SIZE * 3) {
+		return 2;
+	} else if (coordinate > Config.TILE_SIZE * 3
+		&& coordinate < Config.TILE_SIZE * 4) {
+		return 3;
+	} else if (coordinate > Config.TILE_SIZE * 4
+		&& coordinate < Config.TILE_SIZE * 5) {
+		return 4;
+	} else if (coordinate > Config.TILE_SIZE * 5
+		&& coordinate < Config.TILE_SIZE * 6) {
+		return 5;
+	} else if (coordinate > Config.TILE_SIZE * 6
+		&& coordinate < Config.TILE_SIZE * 7) {
+		return 6;
+	} else {
+		return 7;
+	}
+}
