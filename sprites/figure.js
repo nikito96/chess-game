@@ -67,8 +67,8 @@ Figure.prototype.isClicked = function(x, y) {
 
 	if ((x > figureX) && (x < figureX + Config.TILE_SIZE)
 		&& (y > figureY) && (y < figureY + Config.TILE_SIZE)) {
-			this._clicked = true;
-			return true;
+		this._clicked = true;
+		return true;
 	}
 
 	return false;
@@ -81,6 +81,9 @@ Figure.prototype.clicked = function () {
 Figure.prototype.move = function (x, y) {
 	let newX = BoardManager.findCoordinate(x);
 	let newY = BoardManager.findCoordinate(y);
+
 	this.x = newX;
 	this.y = newY;
+	this._clicked = false;
+	BoardManager.reRender()
 }

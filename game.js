@@ -3,10 +3,13 @@ var canvas = document.getElementById("chessBoard");
 BoardManager.init(canvas);
 
 canvas.addEventListener("click", function (event) {
-	var result = BoardManager.isFigureClicked(event.x, event.y);
-	if (result) {
-		var x = event.x;
-		var y = event.y;
-	}
+	let x = event.x;
+	let y = event.y;
+
+	let isFigureClicked = BoardManager.isFigureClicked(x, y);
+	let clicked = BoardManager.clickedFigure();
 	
+	if (clicked && !isFigureClicked) {
+		BoardManager.move(x, y);
+	}
 });

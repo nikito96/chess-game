@@ -108,18 +108,24 @@ BoardManager.loadBoard = function () {
 };
 
 BoardManager.isFigureClicked = function (x, y) {
-
+	let count = 0;
 	for (var figure of BoardManager.figuresCollection) {
 		var result = figure.isClicked(x, y);
-		return result;
+		if (result) {
+			count ++;
+		}
 	}
+
+	if (count > 0) {
+		return true;
+	}
+	return false;
 }
 
 BoardManager.clickedFigure = function () {
 	let i = 0;
 	for (var figure of BoardManager.figuresCollection) {
-		let test = figure.clicked();
-		if(test == true) {
+		if(figure.clicked()) {
 			i++;
 		}
 	}
@@ -132,8 +138,7 @@ BoardManager.clickedFigure = function () {
 
 BoardManager.move = function (x, y) {
 	for (const figure of BoardManager.figuresCollection) {
-		let test = figure.clicked();
-		if (test == true) {
+		if (figure.clicked()) {
 			figure.move(x, y);
 		}
 	}
