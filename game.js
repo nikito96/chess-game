@@ -7,7 +7,7 @@ canvas.addEventListener("click", function (event) {
 	let y = event.y;
 
 	let isFigureClicked = BoardManager.isFigureClicked(x, y);
-	let clicked = BoardManager.clickedFigure();
+	let clicked = BoardManager.isFigureSelected();
 	
 	if (clicked && !isFigureClicked) {
 		BoardManager.move(x, y);

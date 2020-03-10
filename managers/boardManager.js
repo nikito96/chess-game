@@ -122,10 +122,10 @@ BoardManager.isFigureClicked = function (x, y) {
 	return false;
 }
 
-BoardManager.clickedFigure = function () {
+BoardManager.isFigureSelected = function () {
 	let i = 0;
 	for (var figure of BoardManager.figuresCollection) {
-		if(figure.clicked()) {
+		if(figure.isSelected()) {
 			i++;
 		}
 	}
@@ -138,7 +138,7 @@ BoardManager.clickedFigure = function () {
 
 BoardManager.move = function (x, y) {
 	for (const figure of BoardManager.figuresCollection) {
-		if (figure.clicked()) {
+		if (figure.isSelected()) {
 			figure.move(x, y);
 		}
 	}

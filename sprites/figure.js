@@ -3,7 +3,7 @@ var Figure = function (objectConstructor) {
 	this.color = objectConstructor.color;
 	this.x = objectConstructor.x;
 	this.y = objectConstructor.y;
-	this._clicked = false;
+	this._selected = false;
 };
 
 Figure.prototype.render = function(context) {
@@ -67,15 +67,15 @@ Figure.prototype.isClicked = function(x, y) {
 
 	if ((x > figureX) && (x < figureX + Config.TILE_SIZE)
 		&& (y > figureY) && (y < figureY + Config.TILE_SIZE)) {
-		this._clicked = true;
+		this._selected = true;
 		return true;
 	}
 
 	return false;
 };
 
-Figure.prototype.clicked = function () {
-	return this._clicked;
+Figure.prototype.isSelected = function () {
+	return this._selected;
 }
 
 Figure.prototype.move = function (x, y) {
@@ -84,6 +84,6 @@ Figure.prototype.move = function (x, y) {
 
 	this.x = newX;
 	this.y = newY;
-	this._clicked = false;
+	this._selected = false;
 	BoardManager.reRender()
 }
