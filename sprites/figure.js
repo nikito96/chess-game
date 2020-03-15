@@ -61,7 +61,7 @@ Figure.prototype.render = function(context) {
 	};
 };
 
-Figure.prototype.isClicked = function(x, y) {
+Figure.prototype.isClicked = function (x, y) {
 	var figureX = this.x * Config.TILE_SIZE;
 	var figureY = this.y * Config.TILE_SIZE;
 
@@ -76,7 +76,7 @@ Figure.prototype.isClicked = function(x, y) {
 
 Figure.prototype.isSelected = function () {
 	return this._selected;
-}
+};
 
 Figure.prototype.move = function (x, y) {
 	let newX = BoardManager.findCoordinate(x);
@@ -85,5 +85,5 @@ Figure.prototype.move = function (x, y) {
 	this.x = newX;
 	this.y = newY;
 	this._selected = false;
-	BoardManager.reRender()
-}
+	BoardManager.reRender();
+};

@@ -29,6 +29,7 @@ BoardManager.init = function (canvas) {
 	}
 	this.loadBoard();
 };
+
 BoardManager.renderTiles = function () {
 	for (var i = 0; i < BoardManager.tilesCollection.length; i++) {
 		BoardManager.tilesCollection[i].render(BoardManager.context);
@@ -43,11 +44,6 @@ BoardManager.renderFigures = function () {
 
 
 BoardManager.loadBoard = function () {
-	// var loadTiles = function () {
-	// 	for (var i = 0; i < BoardManager.tilesCollection.length; i++) {
-	// 		BoardManager.tilesCollection[i].render(BoardManager.context);
-	// 	}
-	// };
 
 	BoardManager.renderTiles();
 
@@ -87,20 +83,25 @@ BoardManager.loadBoard = function () {
 			y: 1
 		};
 
+		var pawnBlackConstructor_6 = {
+			type: Config.BLACK_FIGURES.PAWN,
+			color: Config.FIGURES_COLORS.BLACK,
+			x: Config.COORDINATES.A,
+			y: 6
+		};
+
 		var pawn_1 = new Figure(pawnWhiteConstructor_1);
 		var pawn_2 = new Figure(pawnWhiteConstructor_2);
 		var pawn_3 = new Figure(pawnWhiteConstructor_3);
 		var pawn_4 = new Figure(pawnWhiteConstructor_4);
 		var pawn_5 = new Figure(pawnWhiteConstructor_5);
+		var pawn_6 = new Figure(pawnBlackConstructor_6);
 		BoardManager.figuresCollection.push(pawn_1);
 		BoardManager.figuresCollection.push(pawn_2);
 		BoardManager.figuresCollection.push(pawn_3);
 		BoardManager.figuresCollection.push(pawn_4);
 		BoardManager.figuresCollection.push(pawn_5);
-
-		// for (var i = 0; i < BoardManager.figuresCollection.length; i++) {
-		// 	BoardManager.figuresCollection[i].render(BoardManager.context);
-		// }
+		BoardManager.figuresCollection.push(pawn_6);
 	};
 
 	loadFigures();
@@ -112,7 +113,7 @@ BoardManager.isFigureClicked = function (x, y) {
 	for (var figure of BoardManager.figuresCollection) {
 		var result = figure.isClicked(x, y);
 		if (result) {
-			count ++;
+			count++;
 		}
 	}
 
