@@ -5,6 +5,7 @@ BoardManager.init = function (canvas) {
 	this.context = this.canvas.getContext("2d");
 	this.tilesCollection = [];
 	this.figuresCollection = [];
+	this.playerOnTurn = Config.PLAYER_COLORS.WHITE;
 
 	for (var i = 0; i < 8; i++) {
 		for (var j = 0; j < 8; j++) {
@@ -109,31 +110,33 @@ BoardManager.loadBoard = function () {
 };
 
 BoardManager.isFigureClicked = function (x, y) {
-	let count = 0;
-	for (var figure of BoardManager.figuresCollection) {
-		var result = figure.isClicked(x, y);
-		if (result) {
-			count++;
+
+	for (let figure of BoardManager.figuresCollection) {
+
+		if (figure.isClicked(x, y)) {
+			let = figureColor = figure.getColor();
+			let = playerOnTurn = BoardManager.getPlayerOnTurn();
+
+			if (figureColor !== playerOnTurn) {
+				return false;
+			}
+
+			return true
 		}
 	}
 
-	if (count > 0) {
-		return true;
-	}
 	return false;
 }
 
 BoardManager.isFigureSelected = function () {
-	let i = 0;
+
 	for (var figure of BoardManager.figuresCollection) {
-		if(figure.isSelected()) {
-			i++;
+		let isSelected = figure.isSelected();
+		if(isSelected) {
+			return true;
 		}
 	}
 
-	if (i > 0) {
-		return true;
-	}
 	return false;
 }
 
@@ -141,6 +144,14 @@ BoardManager.move = function (x, y) {
 	for (const figure of BoardManager.figuresCollection) {
 		if (figure.isSelected()) {
 			figure.move(x, y);
+			
+			let figureColor = figure.getColor();
+
+			if (figureColor == Config.PLAYER_COLORS.WHITE) {
+				BoardManager.setPlayerOnTurn(Config.PLAYER_COLORS.BLACK);
+			} else {
+				BoardManager.setPlayerOnTurn(Config.PLAYER_COLORS.WHITE);
+			}
 		}
 	}
 }
@@ -175,4 +186,12 @@ BoardManager.findCoordinate = function (coordinate) {
 	} else {
 		return 7;
 	}
+}
+
+BoardManager.getPlayerOnTurn = function () {
+	return this.playerOnTurn;
+}
+
+BoardManager.setPlayerOnTurn = function (color) {
+	BoardManager.playerOnTurn = color;
 }

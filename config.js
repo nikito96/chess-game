@@ -33,5 +33,9 @@ var Config = {
 		F: 5,
 		G: 6,
 		H: 7
+	},
+	PLAYER_COLORS: {
+		WHITE: "WHITE",
+		BLACK: "BLACK"
 	}
 };

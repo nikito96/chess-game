@@ -87,3 +87,7 @@ Figure.prototype.move = function (x, y) {
 	this._selected = false;
 	BoardManager.reRender();
 };
+
+Figure.prototype.getColor = function () {
+	return this.color;
+};
