@@ -49,60 +49,153 @@ BoardManager.loadBoard = function () {
 	BoardManager.renderTiles();
 
 	var loadFigures = function () {
-		var pawnWhiteConstructor_1 = {
+		let pawnWhiteConstructor_1 = {
 			type: Config.WHITE_FIGURES.PAWN,
 			color: Config.FIGURES_COLORS.WHITE,
-			x: Config.COORDINATES.A,
-			y: 1
-		};
-
-		var pawnWhiteConstructor_2 = {
-			type: Config.WHITE_FIGURES.PAWN,
-			color: Config.FIGURES_COLORS.WHITE,
-			x: Config.COORDINATES.B,
-			y: 1
-		};
-
-		var pawnWhiteConstructor_3 = {
-			type: Config.WHITE_FIGURES.PAWN,
-			color: Config.FIGURES_COLORS.WHITE,
-			x: Config.COORDINATES.C,
-			y: 1
-		};
-
-		var pawnWhiteConstructor_4 = {
-			type: Config.WHITE_FIGURES.PAWN,
-			color: Config.FIGURES_COLORS.WHITE,
-			x: Config.COORDINATES.D,
-			y: 1
-		};
-
-		var pawnWhiteConstructor_5 = {
-			type: Config.WHITE_FIGURES.PAWN,
-			color: Config.FIGURES_COLORS.WHITE,
-			x: Config.COORDINATES.E,
-			y: 1
-		};
-
-		var pawnBlackConstructor_6 = {
-			type: Config.BLACK_FIGURES.PAWN,
-			color: Config.FIGURES_COLORS.BLACK,
 			x: Config.COORDINATES.A,
 			y: 6
 		};
 
-		var pawn_1 = new Figure(pawnWhiteConstructor_1);
-		var pawn_2 = new Figure(pawnWhiteConstructor_2);
-		var pawn_3 = new Figure(pawnWhiteConstructor_3);
-		var pawn_4 = new Figure(pawnWhiteConstructor_4);
-		var pawn_5 = new Figure(pawnWhiteConstructor_5);
-		var pawn_6 = new Figure(pawnBlackConstructor_6);
-		BoardManager.figuresCollection.push(pawn_1);
-		BoardManager.figuresCollection.push(pawn_2);
-		BoardManager.figuresCollection.push(pawn_3);
-		BoardManager.figuresCollection.push(pawn_4);
-		BoardManager.figuresCollection.push(pawn_5);
-		BoardManager.figuresCollection.push(pawn_6);
+		let pawnWhiteConstructor_2 = {
+			type: Config.WHITE_FIGURES.PAWN,
+			color: Config.FIGURES_COLORS.WHITE,
+			x: Config.COORDINATES.B,
+			y: 6
+		};
+
+		let pawnWhiteConstructor_3 = {
+			type: Config.WHITE_FIGURES.PAWN,
+			color: Config.FIGURES_COLORS.WHITE,
+			x: Config.COORDINATES.C,
+			y: 6
+		};
+
+		let pawnWhiteConstructor_4 = {
+			type: Config.WHITE_FIGURES.PAWN,
+			color: Config.FIGURES_COLORS.WHITE,
+			x: Config.COORDINATES.D,
+			y: 6
+		};
+
+		let rookWhiteConstructor = {
+			type: Config.WHITE_FIGURES.ROOK,
+			color: Config.FIGURES_COLORS.WHITE,
+			x: Config.COORDINATES.D,
+			y: 7
+		};
+
+		let bishopWhiteConstructor = {
+			type: Config.WHITE_FIGURES.BISHOP,
+			color: Config.FIGURES_COLORS.WHITE,
+			x: Config.COORDINATES.C,
+			y: 7
+		};
+
+		let kingWhiteConstructor = {
+			type: Config.WHITE_FIGURES.KING,
+			color: Config.FIGURES_COLORS.WHITE,
+			x: Config.COORDINATES.B,
+			y: 7
+		};
+
+		let queenWhiteConstructor = {
+			type: Config.WHITE_FIGURES.QUEEN,
+			color: Config.FIGURES_COLORS.WHITE,
+			x: Config.COORDINATES.A,
+			y: 7
+		};
+
+		let pawnBlackConstructor_1 = {
+			type: Config.BLACK_FIGURES.PAWN,
+			color: Config.FIGURES_COLORS.BLACK,
+			x: Config.COORDINATES.A,
+			y: 1
+		};
+
+		let pawnBlackConstructor_2 = {
+			type: Config.BLACK_FIGURES.PAWN,
+			color: Config.FIGURES_COLORS.BLACK,
+			x: Config.COORDINATES.B,
+			y: 1
+		};
+
+		let pawnBlackConstructor_3 = {
+			type: Config.BLACK_FIGURES.PAWN,
+			color: Config.FIGURES_COLORS.BLACK,
+			x: Config.COORDINATES.C,
+			y: 1
+		};
+
+		let pawnBlackConstructor_4 = {
+			type: Config.BLACK_FIGURES.PAWN,
+			color: Config.FIGURES_COLORS.BLACK,
+			x: Config.COORDINATES.D,
+			y: 1
+		};
+
+		let rookBlackConstructor = {
+			type: Config.BLACK_FIGURES.ROOK,
+			color: Config.FIGURES_COLORS.BLACK,
+			x: Config.COORDINATES.D,
+			y: 0
+		};
+
+		let bishopBlackConstructor = {
+			type: Config.BLACK_FIGURES.BISHOP,
+			color: Config.FIGURES_COLORS.BLACk,
+			x: Config.COORDINATES.C,
+			y: 0
+		};
+
+		let kingBlackConstructor = {
+			type: Config.BLACK_FIGURES.KING,
+			color: Config.FIGURES_COLORS.BLACk,
+			x: Config.COORDINATES.B,
+			y: 0
+		};
+
+		let queenBlackConstructor = {
+			type: Config.BLACK_FIGURES.QUEEN,
+			color: Config.FIGURES_COLORS.BLACk,
+			x: Config.COORDINATES.A,
+			y: 0
+		};
+
+		let white_pawn_1 = new Figure(pawnWhiteConstructor_1);
+		let white_pawn_2 = new Figure(pawnWhiteConstructor_2);
+		let white_pawn_3 = new Figure(pawnWhiteConstructor_3);
+		let white_pawn_4 = new Figure(pawnWhiteConstructor_4);
+		let white_rook = new Figure(rookWhiteConstructor);
+		let white_bishop = new Figure(bishopWhiteConstructor);
+		let white_king = new Figure(kingWhiteConstructor);
+		let white_queen = new Figure(queenWhiteConstructor);
+
+		let black_pawn_1 = new Figure(pawnBlackConstructor_1);
+		let black_pawn_2 = new Figure(pawnBlackConstructor_2);
+		let black_pawn_3 = new Figure(pawnBlackConstructor_3);
+		let black_pawn_4 = new Figure(pawnBlackConstructor_4);
+		let black_rook = new Figure(rookBlackConstructor);
+		let black_bishop = new Figure(bishopBlackConstructor);
+		let black_king = new Figure(kingBlackConstructor);
+		let black_queen = new Figure(queenBlackConstructor);
+
+		BoardManager.figuresCollection.push(white_pawn_1);
+		BoardManager.figuresCollection.push(white_pawn_2);
+		BoardManager.figuresCollection.push(white_pawn_3);
+		BoardManager.figuresCollection.push(white_pawn_4);
+		BoardManager.figuresCollection.push(white_rook);
+		BoardManager.figuresCollection.push(white_bishop);
+		BoardManager.figuresCollection.push(white_king);
+		BoardManager.figuresCollection.push(white_queen);
+
+		BoardManager.figuresCollection.push(black_pawn_1);
+		BoardManager.figuresCollection.push(black_pawn_2);
+		BoardManager.figuresCollection.push(black_pawn_3);
+		BoardManager.figuresCollection.push(black_pawn_4);
+		BoardManager.figuresCollection.push(black_rook);
+		BoardManager.figuresCollection.push(black_bishop);
+		BoardManager.figuresCollection.push(black_king);
+		BoardManager.figuresCollection.push(black_queen);
 	};
 
 	loadFigures();
@@ -116,6 +209,9 @@ BoardManager.isFigureClicked = function (x, y) {
 		if (figure.isClicked(x, y)) {
 			let = figureColor = figure.getColor();
 			let = playerOnTurn = BoardManager.getPlayerOnTurn();
+
+			console.log("figure color: " + figureColor);
+			console.log("player on turn: " + playerOnTurn);
 
 			if (figureColor !== playerOnTurn) {
 				return false;
@@ -146,7 +242,7 @@ BoardManager.move = function (x, y) {
 			figure.move(x, y);
 			
 			let figureColor = figure.getColor();
-
+			console.log("figure color to be moved: " + figureColor);
 			if (figureColor == Config.PLAYER_COLORS.WHITE) {
 				BoardManager.setPlayerOnTurn(Config.PLAYER_COLORS.BLACK);
 			} else {
@@ -193,5 +289,7 @@ BoardManager.getPlayerOnTurn = function () {
 }
 
 BoardManager.setPlayerOnTurn = function (color) {
+	console.log("set player on turn: " + color);
+	console.log("----");
 	BoardManager.playerOnTurn = color;
 }
