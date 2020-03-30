@@ -243,7 +243,7 @@ BoardManager.isFigureClicked = function (x, y) {
 	}
 
 	return false;
-}
+};
 
 BoardManager.isFigureSelected = function () {
 
@@ -255,29 +255,31 @@ BoardManager.isFigureSelected = function () {
 	}
 
 	return false;
-}
+};
 
-BoardManager.move = function (x, y) {
+BoardManager.action = function (x, y) {
 	for (const figure of BoardManager.figuresCollection) {
 		if (figure.isSelected()) {
-			figure.move(x, y);
+			let moved = figure.move(x, y);
 			
-			let figureColor = figure.getColor();
-			console.log("figure color to be moved: " + figureColor);
-			if (figureColor == Config.PLAYER_COLORS.WHITE) {
-				BoardManager.setPlayerOnTurn(Config.PLAYER_COLORS.BLACK);
-			} else {
-				BoardManager.setPlayerOnTurn(Config.PLAYER_COLORS.WHITE);
+			if (moved) {
+				let figureColor = figure.getColor();
+				console.log("figure color to be moved: " + figureColor);
+				if (figureColor == Config.PLAYER_COLORS.WHITE) {
+					BoardManager.setPlayerOnTurn(Config.PLAYER_COLORS.BLACK);
+				} else {
+					BoardManager.setPlayerOnTurn(Config.PLAYER_COLORS.WHITE);
+				}
 			}
 		}
 	}
-}
+};
 
 BoardManager.reRender = function () {
 	BoardManager.context.clearRect(0, 0, 400, 400);
 	BoardManager.renderTiles();
 	BoardManager.renderFigures();
-}
+};
 
 BoardManager.findCoordinate = function (coordinate) {
 	if (coordinate < Config.TILE_SIZE) {
@@ -303,14 +305,14 @@ BoardManager.findCoordinate = function (coordinate) {
 	} else {
 		return 7;
 	}
-}
+};
 
 BoardManager.getPlayerOnTurn = function () {
 	return this.playerOnTurn;
-}
+};
 
 BoardManager.setPlayerOnTurn = function (color) {
 	console.log("set player on turn: " + color);
 	console.log("----");
 	BoardManager.playerOnTurn = color;
-}
+};

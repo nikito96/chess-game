@@ -42,10 +42,26 @@ Pawn.prototype.move = function (x, y) {
 	let newX = BoardManager.findCoordinate(x);
 	let newY = BoardManager.findCoordinate(y);
 
-	this.x = newX;
-	this.y = newY;
-	this._selected = false;
-	BoardManager.reRender();
+	if ((newY >= (this.y - 2) && this.x == newX)
+		&& this.color == Config.FIGURES_COLORS.WHITE) {
+		this.x = newX;
+		this.y = newY;
+		this._selected = false;
+		BoardManager.reRender();
+		return true;
+	} else if ((newY <= (this.y + 2) && this.x == newX)
+		&& this.color == Config.FIGURES_COLORS.BLACK) {
+		this.x = newX;
+		this.y = newY;
+		this._selected = false;
+		BoardManager.reRender();
+		return true;
+	}
+	return false;
+};
+
+Pawn.prototype.atack = function (x, y) {
+
 };
 
 Pawn.prototype.getColor = function () {

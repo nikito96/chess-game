@@ -10,6 +10,6 @@ canvas.addEventListener("click", function (event) {
 	let isSelected = BoardManager.isFigureSelected();
 
 	if (isSelected && !isFigureClicked) {
-		BoardManager.move(x, y);
+		BoardManager.action(x, y);
 	}
 });
