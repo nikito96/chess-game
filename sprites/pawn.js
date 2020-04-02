@@ -27,7 +27,6 @@ Pawn.prototype.isClicked = function (x, y) {
 
 	if ((x > figureX) && (x < figureX + Config.TILE_SIZE)
 		&& (y > figureY) && (y < figureY + Config.TILE_SIZE)) {
-		this._selected = true;
 		return true;
 	}
 
@@ -36,6 +35,10 @@ Pawn.prototype.isClicked = function (x, y) {
 
 Pawn.prototype.isSelected = function () {
 	return this._selected;
+};
+
+Pawn.prototype.setSelected = function () {
+	this._selected = true;
 };
 
 Pawn.prototype.move = function (x, y) {
@@ -61,7 +64,11 @@ Pawn.prototype.move = function (x, y) {
 };
 
 Pawn.prototype.atack = function (x, y) {
-
+	let newX = BoardManager.findCoordinate(x);
+	let newY = BoardManager.findCoordinate(y);
+	this.x = newX;
+	this.y = newY;
+	BoardManager.reRender();
 };
 
 Pawn.prototype.getColor = function () {

@@ -6,6 +6,7 @@ BoardManager.init = function (canvas) {
 	this.tilesCollection = [];
 	this.figuresCollection = [];
 	this.playerOnTurn = Config.PLAYER_COLORS.WHITE;
+	this.selectedFigure = null;
 
 	for (var i = 0; i < 8; i++) {
 		for (var j = 0; j < 8; j++) {
@@ -230,15 +231,12 @@ BoardManager.isFigureClicked = function (x, y) {
 		if (figure.isClicked(x, y)) {
 			let = figureColor = figure.getColor();
 			let = playerOnTurn = BoardManager.getPlayerOnTurn();
-
-			console.log("figure color: " + figureColor);
-			console.log("player on turn: " + playerOnTurn);
-
-			if (figureColor !== playerOnTurn) {
-				return false;
+			
+			if (figureColor == playerOnTurn) {
+				figure.setSelected();
+				BoardManager.setSelectedFigure(figure);
 			}
-
-			return true
+			return figure;
 		}
 	}
 
@@ -258,6 +256,22 @@ BoardManager.isFigureSelected = function () {
 };
 
 BoardManager.action = function (x, y) {
+	let isFigureClicked = BoardManager.isFigureClicked(x, y);
+	let isSelected = BoardManager.isFigureSelected();
+
+	if (isFigureClicked != false && isSelected) {
+		const selectedFigureColor = BoardManager.getSelectedFigure().getColor();
+		const clickedFigureColor =isFigureClicked.getColor();
+
+		if (selectedFigureColor != clickedFigureColor) {
+			BoardManager.atack(x, y);
+		}
+	} else if (isSelected && !isFigureClicked) {
+		BoardManager.move(x, y);
+	}
+};
+
+BoardManager.move = function (x, y) {
 	for (const figure of BoardManager.figuresCollection) {
 		if (figure.isSelected()) {
 			let moved = figure.move(x, y);
@@ -273,6 +287,16 @@ BoardManager.action = function (x, y) {
 			}
 		}
 	}
+};
+
+BoardManager.atack = function (x, y) {
+	console.log("atack!");
+	BoardManager.figuresCollection.forEach((element, index, arr) => {
+		if (element.x == x && element.y == y) {
+			arr.splice(index, 1);
+			BoardManager.reRender();
+		}
+	});
 };
 
 BoardManager.reRender = function () {
@@ -315,4 +339,12 @@ BoardManager.setPlayerOnTurn = function (color) {
 	console.log("set player on turn: " + color);
 	console.log("----");
 	BoardManager.playerOnTurn = color;
+};
+
+BoardManager.getSelectedFigure = function () {
+	return BoardManager.selectedFigure;
+};
+
+BoardManager.setSelectedFigure = function (figure) {
+	BoardManager.selectedFigure = figure;
 };
