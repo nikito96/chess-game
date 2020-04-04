@@ -255,7 +255,7 @@ BoardManager.isFigureSelected = function () {
 	return false;
 };
 
-BoardManager.action = function (x, y) {
+BoardManager.action = function (x, y) {console.log(BoardManager.getSelectedFigure());
 	let isFigureClicked = BoardManager.isFigureClicked(x, y);
 	let isSelected = BoardManager.isFigureSelected();
 
@@ -264,7 +264,15 @@ BoardManager.action = function (x, y) {
 		const clickedFigureColor =isFigureClicked.getColor();
 
 		if (selectedFigureColor != clickedFigureColor) {
-			BoardManager.atack(x, y);
+			const selectedFigureX = BoardManager.getSelectedFigure().x;
+			const selectedFigureY = BoardManager.getSelectedFigure().y;
+			const atackObject = {
+				x: selectedFigureX,
+				y: selectedFigureY,
+				atackedX: x,
+				atackedY: y
+			};
+			BoardManager.atack(atackObject);
 		}
 	} else if (isSelected && !isFigureClicked) {
 		BoardManager.move(x, y);
@@ -289,12 +297,27 @@ BoardManager.move = function (x, y) {
 	}
 };
 
-BoardManager.atack = function (x, y) {
-	console.log("atack!");
+BoardManager.atack = function (atackObject) {
+	let x = BoardManager.findCoordinate(atackObject.atackedX);
+	let y = BoardManager.findCoordinate(atackObject.atackedY);
+
 	BoardManager.figuresCollection.forEach((element, index, arr) => {
 		if (element.x == x && element.y == y) {
 			arr.splice(index, 1);
-			BoardManager.reRender();
+		}
+	});
+
+	BoardManager.figuresCollection.forEach((element, index, arr) => {
+		if (element.x == atackObject.x && element.y == atackObject.y) {
+			element.atack(x, y);
+			
+			element.setSelected(false);
+
+			if (element.getColor() == Config.PLAYER_COLORS.WHITE) {
+				BoardManager.setPlayerOnTurn(Config.PLAYER_COLORS.BLACK);
+			} else {
+				BoardManager.setPlayerOnTurn(Config.PLAYER_COLORS.WHITE);
+			}
 		}
 	});
 };

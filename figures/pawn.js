@@ -64,10 +64,8 @@ Pawn.prototype.move = function (x, y) {
 };
 
 Pawn.prototype.atack = function (x, y) {
-	let newX = BoardManager.findCoordinate(x);
-	let newY = BoardManager.findCoordinate(y);
-	this.x = newX;
-	this.y = newY;
+	this.x = x;
+	this.y = y;
 	BoardManager.reRender();
 };
 

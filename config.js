@@ -9,20 +9,20 @@ var Config = {
 		BLACK: "BLACK"
 	},
 	WHITE_FIGURES: {
-		PAWN: "img/whitePawn.png",
-		KNIGHT: "img/whiteKnight.png",
-		BISHOP: "img/whiteBishop.png",
-		ROOK: "img/whiteRook.png",
-		QUEEN: "img/whiteQueen.png",
-		KING: "img/whiteKing.png"
+		PAWN: "sprites/whitePawn.png",
+		KNIGHT: "sprites/whiteKnight.png",
+		BISHOP: "sprites/whiteBishop.png",
+		ROOK: "sprites/whiteRook.png",
+		QUEEN: "sprites/whiteQueen.png",
+		KING: "sprites/whiteKing.png"
 	},
 	BLACK_FIGURES: {
-		PAWN: "img/blackPawn.png",
-		KNIGHT: "img/blackKnight.png",
-		BISHOP: "img/blackBishop.png",
-		ROOK: "img/blackRook.png",
-		QUEEN: "img/blackQueen.png",
-		KING: "img/blackKing.png"
+		PAWN: "sprites/blackPawn.png",
+		KNIGHT: "sprites/blackKnight.png",
+		BISHOP: "sprites/blackBishop.png",
+		ROOK: "sprites/blackRook.png",
+		QUEEN: "sprites/blackQueen.png",
+		KING: "sprites/blackKing.png"
 	},
 	COORDINATES : {
 		A: 0,
