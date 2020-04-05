@@ -38,12 +38,32 @@ Rook.prototype.isSelected = function () {
 	return this._selected;
 };
 
+Rook.prototype.setSelected = function () {
+	this._selected = true;
+};
+
 Rook.prototype.move = function (x, y) {
 	let newX = BoardManager.findCoordinate(x);
 	let newY = BoardManager.findCoordinate(y);
+	let figureX = this.x;
+	let figureY = this.y;
 
-	this.x = newX;
-	this.y = newY;
+	if (figureX == newX) {
+			if (figureY < newY) {
+				this.y = newY;
+			} else {
+				this.y = newY;
+			}
+	} else if (figureY == newY) {
+		if (figureX < newX) {
+			this.x = newX;
+		} else {
+			this.x = newX;
+		}
+	}
+
+	// this.x = newX;
+	// this.y = newY;
 	this._selected = false;
 	BoardManager.reRender();
 };

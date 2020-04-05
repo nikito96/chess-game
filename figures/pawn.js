@@ -3,6 +3,7 @@ var Pawn = function (objectConstructor) {
 	this.x = objectConstructor.x;
 	this.y = objectConstructor.y;
 	this._selected = false;
+	this.firstMove = true;
 };
 
 Pawn.prototype.render = function (context) {
@@ -45,20 +46,42 @@ Pawn.prototype.move = function (x, y) {
 	let newX = BoardManager.findCoordinate(x);
 	let newY = BoardManager.findCoordinate(y);
 
-	if ((newY >= (this.y - 2) && this.x == newX)
-		&& this.color == Config.FIGURES_COLORS.WHITE) {
-		this.x = newX;
-		this.y = newY;
-		this._selected = false;
-		BoardManager.reRender();
-		return true;
-	} else if ((newY <= (this.y + 2) && this.x == newX)
-		&& this.color == Config.FIGURES_COLORS.BLACK) {
-		this.x = newX;
-		this.y = newY;
-		this._selected = false;
-		BoardManager.reRender();
-		return true;
+	if (this.firstMove) {
+		if ((newY >= (this.y - 2) && this.x == newX)
+			&& this.color == Config.FIGURES_COLORS.WHITE) {
+			this.x = newX;
+			this.y = newY;
+			this._selected = false;
+			BoardManager.reRender();
+			this.firstMove = false;
+			return true;
+		} else if ((newY <= (this.y + 2) && this.x == newX)
+			&& this.color == Config.FIGURES_COLORS.BLACK) {
+			this.x = newX;
+			this.y = newY;
+			this._selected = false;
+			BoardManager.reRender();
+			this.firstMove = false;
+			return true;
+		}
+	} else {
+		if ((newY >= (this.y - 1) && this.x == newX)
+			&& this.color == Config.FIGURES_COLORS.WHITE) {
+			this.x = newX;
+			this.y = newY;
+			this._selected = false;
+			BoardManager.reRender();
+			this.firstMove = false;
+			return true;
+		} else if ((newY <= (this.y + 1) && this.x == newX)
+			&& this.color == Config.FIGURES_COLORS.BLACK) {
+			this.x = newX;
+			this.y = newY;
+			this._selected = false;
+			BoardManager.reRender();
+			this.firstMove = false;
+			return true;
+		}
 	}
 	return false;
 };
