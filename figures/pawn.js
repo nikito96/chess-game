@@ -65,7 +65,7 @@ Pawn.prototype.move = function (x, y) {
 			return true;
 		}
 	} else {
-		if ((newY >= (this.y - 1) && this.x == newX)
+		if (((newY >= (this.y - 1) && newY < this.y) && this.x == newX)
 			&& this.color == Config.FIGURES_COLORS.WHITE) {
 			this.x = newX;
 			this.y = newY;
@@ -73,7 +73,7 @@ Pawn.prototype.move = function (x, y) {
 			BoardManager.reRender();
 			this.firstMove = false;
 			return true;
-		} else if ((newY <= (this.y + 1) && this.x == newX)
+		} else if (((newY <= (this.y + 1) && newY > this.y) && this.x == newX)
 			&& this.color == Config.FIGURES_COLORS.BLACK) {
 			this.x = newX;
 			this.y = newY;
