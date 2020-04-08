@@ -313,8 +313,8 @@ BoardManager.atack = function (atackObject) {
 				} else {
 					BoardManager.setPlayerOnTurn(Config.PLAYER_COLORS.WHITE);
 				}
+				BoardManager.reRender();
 			}
-			BoardManager.reRender();
 		}
 	});
 };
