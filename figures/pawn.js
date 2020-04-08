@@ -87,9 +87,34 @@ Pawn.prototype.move = function (x, y) {
 };
 
 Pawn.prototype.atack = function (x, y) {
-	this.x = x;
-	this.y = y;
-	BoardManager.reRender();
+
+	if (((x == (this.x + 1) || x == (this.x - 1)) && y == (this.y - 1))
+		&& this.color == Config.FIGURES_COLORS.WHITE) {
+
+		BoardManager.figuresCollection.forEach((element, index, arr) => {
+			if (element.x == x && element.y == y) {
+				arr.splice(index, 1);
+			}
+		});
+		
+		this.x = x;
+		this.y = y;
+		return true;
+	} else if (((x == (this.x + 1) || x == (this.x - 1)) && y == (this.y + 1))
+		&& this.color == Config.FIGURES_COLORS.BLACK) {
+
+		BoardManager.figuresCollection.forEach((element, index, arr) => {
+			if (element.x == x && element.y == y) {
+				arr.splice(index, 1);
+			}
+		});
+
+		this.x = x;
+		this.y = y;
+		return true;
+	}
+	
+	return false;
 };
 
 Pawn.prototype.getColor = function () {

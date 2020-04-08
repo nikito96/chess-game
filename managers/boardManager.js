@@ -302,22 +302,19 @@ BoardManager.atack = function (atackObject) {
 	let y = BoardManager.findCoordinate(atackObject.atackedY);
 
 	BoardManager.figuresCollection.forEach((element, index, arr) => {
-		if (element.x == x && element.y == y) {
-			arr.splice(index, 1);
-		}
-	});
-
-	BoardManager.figuresCollection.forEach((element, index, arr) => {
 		if (element.x == atackObject.x && element.y == atackObject.y) {
-			element.atack(x, y);
+			let atackSucceeded = element.atack(x, y);
 			
-			element.setSelected(false);
+			if (atackSucceeded) {
+				element.setSelected(false);
 
-			if (element.getColor() == Config.PLAYER_COLORS.WHITE) {
-				BoardManager.setPlayerOnTurn(Config.PLAYER_COLORS.BLACK);
-			} else {
-				BoardManager.setPlayerOnTurn(Config.PLAYER_COLORS.WHITE);
+				if (element.getColor() == Config.PLAYER_COLORS.WHITE) {
+					BoardManager.setPlayerOnTurn(Config.PLAYER_COLORS.BLACK);
+				} else {
+					BoardManager.setPlayerOnTurn(Config.PLAYER_COLORS.WHITE);
+				}
 			}
+			BoardManager.reRender();
 		}
 	});
 };
