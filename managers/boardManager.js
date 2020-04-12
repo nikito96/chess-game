@@ -233,7 +233,13 @@ BoardManager.isFigureClicked = function (x, y) {
 			let = playerOnTurn = BoardManager.getPlayerOnTurn();
 			
 			if (figureColor == playerOnTurn) {
-				figure.setSelected();
+				BoardManager.figuresCollection.forEach((figure, index, arr) => {
+					if (figure.isSelected()) {
+						figure.setSelected(false);
+					}
+				});
+				
+				figure.setSelected(true);
 				BoardManager.setSelectedFigure(figure);
 			}
 			return figure;
@@ -303,8 +309,11 @@ BoardManager.atack = function (atackObject) {
 
 	BoardManager.figuresCollection.forEach((element, index, arr) => {
 		if (element.x == atackObject.x && element.y == atackObject.y) {
-			let atackSucceeded = element.atack(x, y);
+			console.log(element);
+			console.log(BoardManager.figuresCollection);
 			
+			let atackSucceeded = element.atack(x, y);
+			console.log("atackSucceeded " + atackSucceeded);
 			if (atackSucceeded) {
 				element.setSelected(false);
 
@@ -315,6 +324,9 @@ BoardManager.atack = function (atackObject) {
 				}
 				BoardManager.reRender();
 			}
+
+			console.log(element);
+			console.log(BoardManager.figuresCollection);
 		}
 	});
 };

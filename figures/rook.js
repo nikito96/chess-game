@@ -27,7 +27,6 @@ Rook.prototype.isClicked = function (x, y) {
 
 	if ((x > figureX) && (x < figureX + Config.TILE_SIZE)
 		&& (y > figureY) && (y < figureY + Config.TILE_SIZE)) {
-		this._selected = true;
 		return true;
 	}
 
@@ -38,8 +37,8 @@ Rook.prototype.isSelected = function () {
 	return this._selected;
 };
 
-Rook.prototype.setSelected = function () {
-	this._selected = true;
+Rook.prototype.setSelected = function (value) {
+	this._selected = value;
 };
 
 Rook.prototype.move = function (x, y) {
@@ -51,21 +50,74 @@ Rook.prototype.move = function (x, y) {
 	if (figureX == newX) {
 			if (figureY < newY) {
 				this.y = newY;
+				this._selected = false;
+				BoardManager.reRender();
+				return true;
 			} else {
 				this.y = newY;
+				this._selected = false;
+				BoardManager.reRender();
+				return true;
 			}
 	} else if (figureY == newY) {
 		if (figureX < newX) {
 			this.x = newX;
+			this._selected = false;
+			BoardManager.reRender();
+			return true;
 		} else {
 			this.x = newX;
+			this._selected = false;
+			BoardManager.reRender();
+			return true;
 		}
 	}
+};
 
-	// this.x = newX;
-	// this.y = newY;
-	this._selected = false;
-	BoardManager.reRender();
+Rook.prototype.atack = function (x, y) {
+	if (this.x == x) {
+		if (this.y < y) {
+			BoardManager.figuresCollection.forEach((element, index, arr) => {
+				if (element.x == x && element.y == y) {
+					arr.splice(index, 1);
+				}
+			});
+
+			this.y = y;
+			return true;
+		} else {
+			BoardManager.figuresCollection.forEach((element, index, arr) => {
+				if (element.x == x && element.y == y) {
+					arr.splice(index, 1);
+				}
+			});
+
+			this.y = y;
+			return true;
+		}
+	} else if (this.y == y) {
+		if (this.x < x) {
+			BoardManager.figuresCollection.forEach((element, index, arr) => {
+				if (element.x == x && element.y == y) {
+					arr.splice(index, 1);
+				}
+			});
+
+			this.x = x;
+			return true;
+		} else {
+			BoardManager.figuresCollection.forEach((element, index, arr) => {
+				if (element.x == x && element.y == y) {
+					arr.splice(index, 1);
+				}
+			});
+
+			this.x = x;
+			return true;
+		}
+	}
+	
+	return false;
 };
 
 Rook.prototype.getColor = function () {

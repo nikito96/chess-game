@@ -38,8 +38,8 @@ Pawn.prototype.isSelected = function () {
 	return this._selected;
 };
 
-Pawn.prototype.setSelected = function () {
-	this._selected = true;
+Pawn.prototype.setSelected = function (value) {
+	this._selected = value;
 };
 
 Pawn.prototype.move = function (x, y) {
@@ -99,6 +99,7 @@ Pawn.prototype.atack = function (x, y) {
 		
 		this.x = x;
 		this.y = y;
+		this._selected = false;
 		return true;
 	} else if (((x == (this.x + 1) || x == (this.x - 1)) && y == (this.y + 1))
 		&& this.color == Config.FIGURES_COLORS.BLACK) {
@@ -111,6 +112,7 @@ Pawn.prototype.atack = function (x, y) {
 
 		this.x = x;
 		this.y = y;
+		this._selected = false;
 		return true;
 	}
 	
