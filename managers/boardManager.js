@@ -322,8 +322,10 @@ BoardManager.atack = function (atackObject) {
 				BoardManager.increasePoints(element);
 
 				if (element.getColor() == Config.PLAYER_COLORS.WHITE) {
+					BoardManager.refreshWhitePoints();
 					BoardManager.setPlayerOnTurn(Config.PLAYER_COLORS.BLACK);
 				} else {
+					BoardManager.refreshBlackPoints();
 					BoardManager.setPlayerOnTurn(Config.PLAYER_COLORS.WHITE);
 				}
 				BoardManager.reRender();
@@ -408,4 +410,14 @@ BoardManager.increasePoints = function (figure) {
 			}
 			break;
 	}
+};
+
+BoardManager.refreshWhitePoints = function () {
+	BoardManager.whitePointsLabel.innerHTML =
+		BoardManager.pointsManager.getWhitePlayerPoints();
+};
+
+BoardManager.refreshBlackPoints = function () {
+	BoardManager.blackPointsLabel.innerHTML =
+		BoardManager.pointsManager.getBlackPlayerPoints();
 };
