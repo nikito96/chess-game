@@ -4,6 +4,7 @@ var Pawn = function (objectConstructor) {
 	this.y = objectConstructor.y;
 	this._selected = false;
 	this.firstMove = true;
+	this.type = "PAWN";
 };
 
 Pawn.prototype.render = function (context) {
@@ -121,4 +122,8 @@ Pawn.prototype.atack = function (x, y) {
 
 Pawn.prototype.getColor = function () {
 	return this.color;
+};
+
+Pawn.prototype.getType = function () {
+	return this.type;
 };

@@ -3,6 +3,7 @@ var Rook = function (objectConstructor) {
 	this.x = objectConstructor.x;
 	this.y = objectConstructor.y;
 	this._selected = false;
+	this.type = "ROOK";
 };
 
 Rook.prototype.render = function (context) {
@@ -122,4 +123,8 @@ Rook.prototype.atack = function (x, y) {
 
 Rook.prototype.getColor = function () {
 	return this.color;
+};
+
+Rook.prototype.getType = function () {
+	return this.type;
 };

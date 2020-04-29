@@ -37,5 +37,17 @@ var Config = {
 	PLAYER_COLORS: {
 		WHITE: "WHITE",
 		BLACK: "BLACK"
+	},
+	FIGURES_POINTS: {
+		PAWN: 5,
+		ROOK: 20
+	},
+	FIGURES_NAMES: {
+		PAWN: "PAWN",
+		KNIGHT: "KNIGHT",
+		BISHOP: "BISHOP",
+		ROOK: "ROOK",
+		QUEEN: "QUEEN",
+		KING: "KING"
 	}
 };

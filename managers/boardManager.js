@@ -7,6 +7,9 @@ BoardManager.init = function (canvas) {
 	this.figuresCollection = [];
 	this.playerOnTurn = Config.PLAYER_COLORS.WHITE;
 	this.selectedFigure = null;
+	this.pointsManager = new PointsManager();
+	this.whitePointsLabel = document.getElementById("whitePoints");
+    this.blackPointsLabel = document.getElementById("blackPoints");	
 
 	for (var i = 0; i < 8; i++) {
 		for (var j = 0; j < 8; j++) {
@@ -43,7 +46,6 @@ BoardManager.renderFigures = function () {
 		BoardManager.figuresCollection[i].render(BoardManager.context);
 	}
 }
-
 
 BoardManager.loadBoard = function () {
 
@@ -317,6 +319,8 @@ BoardManager.atack = function (atackObject) {
 			if (atackSucceeded) {
 				element.setSelected(false);
 
+				BoardManager.increasePoints(element);
+
 				if (element.getColor() == Config.PLAYER_COLORS.WHITE) {
 					BoardManager.setPlayerOnTurn(Config.PLAYER_COLORS.BLACK);
 				} else {
@@ -379,4 +383,29 @@ BoardManager.getSelectedFigure = function () {
 
 BoardManager.setSelectedFigure = function (figure) {
 	BoardManager.selectedFigure = figure;
+};
+
+BoardManager.increasePoints = function (figure) {
+	const type = figure.getType();
+	const color = figure.getColor();
+	switch (type) {
+		case Config.FIGURES_NAMES.PAWN:
+			if (color == Config.FIGURES_COLORS.WHITE) {
+				BoardManager.pointsManager.increasePoints(
+					Config.PLAYER_COLORS.WHITE, Config.FIGURES_POINTS.PAWN);
+			} else {
+				BoardManager.pointsManager.increasePoints(
+					Config.PLAYER_COLORS.BLACK, Config.FIGURES_POINTS.PAWN);
+			}
+			break;
+		case Config.FIGURES_NAMES.ROOK:
+			if (color == Config.FIGURES_COLORS.WHITE) {
+				BoardManager.pointsManager.increasePoints(
+					Config.PLAYER_COLORS.WHITE, Config.FIGURES_POINTS.ROOK);
+			} else {
+				BoardManager.pointsManager.increasePoints(
+					Config.PLAYER_COLORS.BLACK, Config.FIGURES_POINTS.ROOK);
+			}
+			break;
+	}
 };
