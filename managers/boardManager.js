@@ -421,3 +421,16 @@ BoardManager.refreshBlackPoints = function () {
 	BoardManager.blackPointsLabel.innerHTML =
 		BoardManager.pointsManager.getBlackPlayerPoints();
 };
+
+BoardManager.isEmpty = function (x, y) {
+
+	const figureExists = BoardManager.figuresCollection.some((element) => {
+		return (element.x == x && element.y == y);
+	});
+	
+	if (figureExists) {
+		return false;
+	}
+
+	return true;
+};

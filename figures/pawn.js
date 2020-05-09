@@ -50,6 +50,12 @@ Pawn.prototype.move = function (x, y) {
 	if (this.firstMove) {
 		if ((newY >= (this.y - 2) && this.x == newX)
 			&& this.color == Config.FIGURES_COLORS.WHITE) {
+			
+			if (!this.isPathFree(newX, newY)) {
+				console.log("path is not free!");
+				return false;
+			}
+			
 			this.x = newX;
 			this.y = newY;
 			this._selected = false;
@@ -58,6 +64,12 @@ Pawn.prototype.move = function (x, y) {
 			return true;
 		} else if ((newY <= (this.y + 2) && this.x == newX)
 			&& this.color == Config.FIGURES_COLORS.BLACK) {
+
+			if (!this.isPathFree(newX, newY)) {
+				console.log("path is not free!");
+				return false;
+			}
+
 			this.x = newX;
 			this.y = newY;
 			this._selected = false;
@@ -126,4 +138,19 @@ Pawn.prototype.getColor = function () {
 
 Pawn.prototype.getType = function () {
 	return this.type;
+};
+
+Pawn.prototype.isPathFree = function (newX, newY) {
+	if (this.color === Config.FIGURES_COLORS.WHITE) {
+		if (!BoardManager.isEmpty(newX, newY + 1)
+			&& newY == this.y - 2) {
+			return false;
+		}
+	} else {
+		if (!BoardManager.isEmpty(newX, newY - 1)
+			&& newY == this.y + 2) {
+			return false;
+		}
+	}
+	return true;
 };
