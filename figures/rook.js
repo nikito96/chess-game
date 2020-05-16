@@ -48,6 +48,11 @@ Rook.prototype.move = function (x, y) {
 	let figureX = this.x;
 	let figureY = this.y;
 
+	if (!this.isPathFree(x, y)) {
+		console.log("path is not free!");
+		return false;
+	}
+
 	if (figureX == newX) {
 			if (figureY < newY) {
 				this.y = newY;
@@ -76,6 +81,7 @@ Rook.prototype.move = function (x, y) {
 };
 
 Rook.prototype.atack = function (x, y) {
+
 	if (this.x == x) {
 		if (this.y < y) {
 			BoardManager.figuresCollection.forEach((element, index, arr) => {
@@ -127,4 +133,65 @@ Rook.prototype.getColor = function () {
 
 Rook.prototype.getType = function () {
 	return this.type;
+};
+
+Rook.prototype.isPathFree = function (x, y) {
+	let i = 0;
+	let startX = this.x;
+	let startY = this.y;
+	x = BoardManager.findCoordinate(x);
+	y = BoardManager.findCoordinate(y);
+
+	console.log("startX: " + startX);
+	console.log("startY: " + startY);
+	
+	if (startY == y) {
+		console.log("first");
+		if (startX < x) {
+			for (i = startX + 1; i <= x; ++i) {
+				var test = BoardManager.isEmpty(i, startY);
+				console.log("test1 " + test);
+				console.log("x: " + x);
+				console.log("y: " + y);
+				if (!test) {
+					return false;
+				}
+			}
+		} else {
+			for (i = startX - 1; i >= x; --i) {
+				var test = BoardManager.isEmpty(i, startY);
+				console.log("test2 " + test);
+				console.log("x: " + x);
+				console.log("y: " + y);
+				if (!test) {
+					return false;
+				}
+			}
+		}
+	} else if (startX == x) {
+		console.log("second");
+		if (startY < y) {
+			for (i = startY + 1; i <= y; ++i) {
+				var test = BoardManager.isEmpty(startX, i);
+				console.log("test3 " + test);
+				console.log("x: " + x);
+				console.log("y: " + y);
+				if (!test) {
+					return false;
+				}
+			}
+		} else {
+			for (i = startY - 1; i >= y; --i) {
+				var test = BoardManager.isEmpty(startX, i);
+				console.log("test4 " + test);
+				console.log("x: " + x);
+				console.log("y: " + y);
+				if (!test) {
+					return false;
+				}
+			}
+		}
+	}
+
+	return true;
 };

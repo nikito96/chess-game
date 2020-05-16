@@ -140,15 +140,15 @@ Pawn.prototype.getType = function () {
 	return this.type;
 };
 
-Pawn.prototype.isPathFree = function (newX, newY) {
+Pawn.prototype.isPathFree = function (x, y) {
 	if (this.color === Config.FIGURES_COLORS.WHITE) {
-		if (!BoardManager.isEmpty(newX, newY + 1)
-			&& newY == this.y - 2) {
+		if (!BoardManager.isEmpty(x, y + 1)
+			&& y == this.y - 2) {
 			return false;
 		}
 	} else {
-		if (!BoardManager.isEmpty(newX, newY - 1)
-			&& newY == this.y + 2) {
+		if (!BoardManager.isEmpty(x, y - 1)
+			&& y == this.y + 2) {
 			return false;
 		}
 	}
