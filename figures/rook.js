@@ -48,7 +48,7 @@ Rook.prototype.move = function (x, y) {
 	let figureX = this.x;
 	let figureY = this.y;
 
-	if (!this.isPathFree(x, y)) {
+	if (!this.isPathFree(newX, newY)) {
 		console.log("path is not free!");
 		return false;
 	}
@@ -84,43 +84,59 @@ Rook.prototype.atack = function (x, y) {
 
 	if (this.x == x) {
 		if (this.y < y) {
-			BoardManager.figuresCollection.forEach((element, index, arr) => {
-				if (element.x == x && element.y == y) {
-					arr.splice(index, 1);
-				}
-			});
+			if ((this.y + 1 == y && !BoardManager.isEmpty(x, y)) || this.isPathFree(x, y)) {
+				BoardManager.figuresCollection.forEach((element, index, arr) => {
+					if (element.x == x && element.y == y) {
+						arr.splice(index, 1);
+					}
+				});
+	
+				this.y = y;
+				return true;
+			}
 
-			this.y = y;
-			return true;
+			return false;
 		} else {
-			BoardManager.figuresCollection.forEach((element, index, arr) => {
-				if (element.x == x && element.y == y) {
-					arr.splice(index, 1);
-				}
-			});
+			if ((this.y - 1 == y && !BoardManager.isEmpty(x, y)) || this.isPathFree(x, y)) {
+				BoardManager.figuresCollection.forEach((element, index, arr) => {
+					if (element.x == x && element.y == y) {
+						arr.splice(index, 1);
+					}
+				});
+	
+				this.y = y;
+				return true;
+			}
 
-			this.y = y;
-			return true;
+			return false;
 		}
 	} else if (this.y == y) {
 		if (this.x < x) {
-			BoardManager.figuresCollection.forEach((element, index, arr) => {
-				if (element.x == x && element.y == y) {
-					arr.splice(index, 1);
-				}
-			});
-
-			this.x = x;
-			return true;
+			if ((this.x + 1 == x && !BoardManager.isEmpty(x, y)) || this.isPathFree(x, y)) {
+				BoardManager.figuresCollection.forEach((element, index, arr) => {
+					if (element.x == x && element.y == y) {
+						arr.splice(index, 1);
+					}
+				});
+	
+				this.x = x;
+				return true;
+			}
+			
+			return false;
 		} else {
-			BoardManager.figuresCollection.forEach((element, index, arr) => {
-				if (element.x == x && element.y == y) {
-					arr.splice(index, 1);
-				}
-			});
+			if ((this.y - 1 == y && !BoardManager.isEmpty(x, y)) || this.isPathFree(x, y)) {
+				BoardManager.figuresCollection.forEach((element, index, arr) => {
+					if (element.x == x && element.y == y) {
+						arr.splice(index, 1);
+					}
+				});
+	
+				this.x = x;
+				return true;
+			}
 
-			this.x = x;
-			return true;
+			return false;
 		}
 	}
 	
@@ -139,54 +155,35 @@ Rook.prototype.isPathFree = function (x, y) {
 	let i = 0;
 	let startX = this.x;
 	let startY = this.y;
-	x = BoardManager.findCoordinate(x);
-	y = BoardManager.findCoordinate(y);
 
 	console.log("startX: " + startX);
 	console.log("startY: " + startY);
+	console.log("x: ", x, ", y: ", y);
 	
 	if (startY == y) {
-		console.log("first");
 		if (startX < x) {
-			for (i = startX + 1; i <= x; ++i) {
-				var test = BoardManager.isEmpty(i, startY);
-				console.log("test1 " + test);
-				console.log("x: " + x);
-				console.log("y: " + y);
-				if (!test) {
+			for (i = startX + 1; i < x; ++i) {
+				if (!BoardManager.isEmpty(i, startY)) {
 					return false;
 				}
 			}
 		} else {
-			for (i = startX - 1; i >= x; --i) {
-				var test = BoardManager.isEmpty(i, startY);
-				console.log("test2 " + test);
-				console.log("x: " + x);
-				console.log("y: " + y);
-				if (!test) {
+			for (i = startX - 1; i > x; --i) {
+				if (!BoardManager.isEmpty(i, startY)) {
 					return false;
 				}
 			}
 		}
 	} else if (startX == x) {
-		console.log("second");
 		if (startY < y) {
-			for (i = startY + 1; i <= y; ++i) {
-				var test = BoardManager.isEmpty(startX, i);
-				console.log("test3 " + test);
-				console.log("x: " + x);
-				console.log("y: " + y);
-				if (!test) {
+			for (i = startY + 1; i < y; ++i) {
+				if (!BoardManager.isEmpty(startX, i)) {
 					return false;
 				}
 			}
 		} else {
-			for (i = startY - 1; i >= y; --i) {
-				var test = BoardManager.isEmpty(startX, i);
-				console.log("test4 " + test);
-				console.log("x: " + x);
-				console.log("y: " + y);
-				if (!test) {
+			for (i = startY - 1; i > y; --i) {
+				if (!BoardManager.isEmpty(startX, i)) {
 					return false;
 				}
 			}
